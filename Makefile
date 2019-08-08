@@ -15,3 +15,12 @@ test:
 
 depends:
 	go get -u -v gopkg.in/check.v1
+
+help:
+	@echo "------ How to use this Makefile ------"
+	@echo "make build   - Builds the executable."
+	@echo "make clean   - Cleans the work directory."
+	@echo "make test    - Runs the Unit tests and shows code coverage."
+	@echo "make depends - Downloads the check.v1 dependency framework needed"
+	@echo "               for running unit tests."
+	@echo "--------------------------------------"
