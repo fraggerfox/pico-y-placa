@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"testing"
 
 	. "gopkg.in/check.v1"
@@ -15,23 +16,82 @@ var _ = Suite(&picoyplacaSuite{})
 // Unit tests
 
 func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_ValidDateValidTime(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validDateString := "2019-05-01"
+	validTimeString := "07:35:41"
+
+	expectedWeekDay := time.Wednesday
+	expectedDate := validDateString
+	expectedTime := validTimeString
+
+	actualDateTime, actualError := parseDateTime(validDateString, validTimeString)
+	actualDate := actualDateTime.Format("2006-01-02")
+	actualTime := actualDateTime.Format("15:04:05")
+	actualWeekDay := actualDateTime.Weekday()
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualDate, Equals, expectedDate)
+	c.Assert(actualTime, Equals, expectedTime)
+	c.Assert(actualWeekDay, Equals, expectedWeekDay)
 }
 
 func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_ValidDateInvalidTime(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validDateString := "2019-05-01"
+	invalidTimeString := "35:80:90"
+
+	expectedWeekDay := time.Monday
+	expectedDate := "0001-01-01"
+	expectedTime := "00:00:00"
+
+	actualDateTime, actualError := parseDateTime(validDateString, invalidTimeString)
+	actualDate := actualDateTime.Format("2006-01-02")
+	actualTime := actualDateTime.Format("15:04:05")
+	actualWeekDay := actualDateTime.Weekday()
+
+	c.Assert(actualError, NotNil)
+	c.Assert(actualError, ErrorMatches, "Invalid Date or Time given.")
+	c.Assert(actualDate, Equals, expectedDate)
+	c.Assert(actualTime, Equals, expectedTime)
+	c.Assert(actualWeekDay, Equals, expectedWeekDay)
 }
 
 func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_InvalidDateValidTime(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	invalidDateString := "20-05-2019"
+	validTimeString := "15:00:00"
+
+	expectedWeekDay := time.Monday
+	expectedDate := "0001-01-01"
+	expectedTime := "00:00:00"
+
+	actualDateTime, actualError := parseDateTime(invalidDateString, validTimeString)
+	actualDate := actualDateTime.Format("2006-01-02")
+	actualTime := actualDateTime.Format("15:04:05")
+	actualWeekDay := actualDateTime.Weekday()
+
+	c.Assert(actualError, NotNil)
+	c.Assert(actualError, ErrorMatches, "Invalid Date or Time given.")
+	c.Assert(actualDate, Equals, expectedDate)
+	c.Assert(actualTime, Equals, expectedTime)
+	c.Assert(actualWeekDay, Equals, expectedWeekDay)
 }
 
 func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_InvalidDateInvalidTime(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	invalidDateString := "2019-15-45"
+	invalidTimeString := "30:80:90"
+
+	expectedWeekDay := time.Monday
+	expectedDate := "0001-01-01"
+	expectedTime := "00:00:00"
+
+	actualDateTime, actualError := parseDateTime(invalidDateString, invalidTimeString)
+	actualDate := actualDateTime.Format("2006-01-02")
+	actualTime := actualDateTime.Format("15:04:05")
+	actualWeekDay := actualDateTime.Weekday()
+
+	c.Assert(actualError, NotNil)
+	c.Assert(actualError, ErrorMatches, "Invalid Date or Time given.")
+	c.Assert(actualDate, Equals, expectedDate)
+	c.Assert(actualTime, Equals, expectedTime)
+	c.Assert(actualWeekDay, Equals, expectedWeekDay)
 }
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_ValidLicensePate(c *C) {

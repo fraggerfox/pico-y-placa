@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"time"
 )
 
@@ -18,8 +19,11 @@ func validateLicensePlate(licensePlate string) bool {
 // Converts an ISO 8601 notation date (YYYY-MM-DD) and time (HH:MM:SS) into a
 // RFC3339 Time object for further processing.
 func parseDateTime(dateString, timeString string) (time.Time, error) {
-	// XXX: Not Implemented
-	return time.Now(), nil
+	dateTime, err := time.Parse(time.RFC3339, dateString + "T" + timeString + "-05:00")
+	if err != nil {
+		return dateTime, errors.New("Invalid Date or Time given.")
+	}
+	return dateTime, err
 }
 
 // Extracts the last digit of the given license plate
