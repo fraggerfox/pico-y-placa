@@ -12,6 +12,8 @@ type picoyplacaSuite struct{}
 
 var _ = Suite(&picoyplacaSuite{})
 
+// Unit tests
+
 func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_ValidDateValidTime(c *C) {
 	c.Skip("XXX: Not implemented")
 	c.Fail()
