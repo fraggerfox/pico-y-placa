@@ -2,7 +2,9 @@ package main
 
 import (
 	"errors"
+	"strings"
 	"time"
+	"unicode"
 )
 
 func main() {
@@ -10,10 +12,39 @@ func main() {
 }
 
 // A custom function to validate a given license plate value.
+//
+// TODO: One can improve upon this function to add additional checks
+//
+// 1. Better checking of plates to identify if they are government, diplomatic,
+// offical etc, this can be better used to filter out vehicles to which the
+// Pico y Placa rules do not apply
+//
+// 2. Add some way to identify emergency vehicles
+//
 // Reference: https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Ecuador
 func validateLicensePlate(licensePlate string) bool {
-	// XXX: Not Implemented
-	return false
+	licensePlateSplit := strings.Split(licensePlate, "-")
+
+	// There should be only two parts when split by hyphen
+	if len(licensePlateSplit) != 2 {
+		return false
+	}
+
+	// Validate first part is purely alphabets
+	for _, r := range licensePlateSplit[0] {
+		if !unicode.IsLetter(r) {
+			return false
+		}
+	}
+
+	// Validate second part is purely digits
+	for _, r := range licensePlateSplit[1] {
+		if !unicode.IsDigit(r) {
+			return false
+		}
+	}
+
+	return true
 }
 
 // Converts an ISO 8601 notation date (YYYY-MM-DD) and time (HH:MM:SS) into a

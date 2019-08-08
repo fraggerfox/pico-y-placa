@@ -95,23 +95,43 @@ func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_InvalidDateInvalidTime(c *C
 }
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_ValidLicensePate(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validLicensePlate := "AAC-1111"
+
+	expectedValidity := true
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
 }
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_MissingHyphen(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validLicensePlate := "AAC1111"
+
+	expectedValidity := false
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
 }
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_NonAlphabetBeforeHyphen(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validLicensePlate := "AAC1111"
+
+	expectedValidity := false
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
 }
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_NonNumericAfterHyphen(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	validLicensePlate := "AAC-1A11"
+
+	expectedValidity := false
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
 }
 
 func (s *picoyplacaSuite) Test_extractLastDigit_ValidLicensePlate(c *C) {
