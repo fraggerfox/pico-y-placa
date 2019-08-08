@@ -134,16 +134,6 @@ func (s *picoyplacaSuite) Test_validateLicensePlate_NonNumericAfterHyphen(c *C) 
 	c.Assert(actualValidity, Equals, expectedValidity)
 }
 
-func (s *picoyplacaSuite) Test_extractLastDigit_ValidLicensePlate(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
-}
-
-func (s *picoyplacaSuite) Test_extractLastDigit_InvalidLicensePlate(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
-}
-
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_1(c *C) {
 	c.Skip("XXX: Not implemented")
 	c.Fail()
@@ -222,4 +212,29 @@ func (s *picoyplacaSuite) Test_allowedInCity_Weekend_1(c *C) {
 func (s *picoyplacaSuite) Test_allowedInCity_Weekend_2(c *C) {
 	c.Skip("XXX: Not implemented")
 	c.Fail()
+}
+
+// Functional tests
+
+func (s *picoyplacaSuite) Test_extractLastDigit_ValidLicensePlate(c *C) {
+	validLicensePlate := "AAC-1111"
+
+	expectedLastDigit := 1
+
+	actualLastDigit, actualError := extractLastDigit(validLicensePlate)
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualLastDigit, Equals, expectedLastDigit)
+}
+
+func (s *picoyplacaSuite) Test_extractLastDigit_InvalidLicensePlate(c *C) {
+	validLicensePlate := "A1C-1111"
+
+	expectedLastDigit := -1
+
+	actualLastDigit, actualError := extractLastDigit(validLicensePlate)
+
+	c.Assert(actualError, NotNil)
+	c.Assert(actualError, ErrorMatches, "Invalid license plate")
+	c.Assert(actualLastDigit, Equals, expectedLastDigit)
 }

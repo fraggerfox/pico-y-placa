@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 	"time"
 	"unicode"
@@ -57,10 +58,16 @@ func parseDateTime(dateString, timeString string) (time.Time, error) {
 	return dateTime, err
 }
 
-// Extracts the last digit of the given license plate
+// Extracts the last digit of the given license plate.
+// In case of invalid plates we return a -1, since license plates numbers cannot
+// be negative.
 func extractLastDigit(licensePlate string) (int, error) {
-	// XXX: Not Implemented
-	return 0, nil
+	if validateLicensePlate(licensePlate) == true {
+		lastDigit, _ := strconv.Atoi(licensePlate[len(licensePlate) - 1:])
+		return lastDigit, nil
+	} else {
+		return -1, errors.New("Invalid license plate")
+	}
 }
 
 // Applies the rules of "Pico y Placa" to see if the vechicle is allowed in the
