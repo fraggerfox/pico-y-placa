@@ -57,11 +57,17 @@ The implementation is done using [Golang][2].
     $
     ```
 
-License
--------
+## Implementation notes
 
-BSD 2-clause. See LICENSE.
+Details on assumptions and implementation for the program can be found in
+[notes.md][4].
+
+## License
+
+BSD 2-clause. See [LICENSE][5].
 
 [1]: https://www.stackbuilders.com/
 [2]: https://golang.org
 [3]: https://gopkg.in/check.v1
+[4]: https://github.com/fraggerfox/pico-y-placa/blob/master/notes.md
+[5]: https://github.com/fraggerfox/pico-y-placa/blob/master/LICENSE

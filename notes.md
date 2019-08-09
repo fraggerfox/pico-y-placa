@@ -48,6 +48,14 @@ The above rules do not apply to the weekends / holidays.
   - Checking for holidays (other than weekends) where the rules are not applied.
   - Checking if the given number plate is emergency vehicle.
   - Better validation by checking the length of digits and alphabets.
+- Improve input flexibility to allow for flexible input of date and time.
+
+## OS Compatibility
+
+The program was tested and confirmed to be working on the following systems
+
+- Cygwin/amd64 3.0.7-1 (running under Windows 7 Professional)
+- FreeBSD/amd64 12.0-RELEASE-p8 (running under bhyve(8))
 
 [1]: https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Ecuador
 [2]: https://es.wikipedia.org/wiki/Pico_y_placa#Quito,_Ecuador
