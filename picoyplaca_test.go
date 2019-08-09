@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"time"
 	"testing"
 
@@ -331,8 +332,14 @@ func (s *picoyplacaSuite) Test_allowedInCity_Weekend_2(c *C) {
 }
 
 func (s *picoyplacaSuite) Test_displayUsage_VerifyText(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	os.Args = []string{"/path/to/exec.ext"}
+
+	expectedReturn := 714
+
+	actualResult, actualError := displayUsage()
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 // Functional tests

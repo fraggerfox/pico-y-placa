@@ -2,6 +2,9 @@ package main
 
 import (
 	"errors"
+	"fmt"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -17,7 +20,27 @@ func start() (int, error) {
 }
 
 func displayUsage() (int, error) {
-	return 0, nil
+	executableName := strings.TrimSuffix(filepath.Base(os.Args[0]), filepath.Ext(filepath.Base(os.Args[0])))
+	helpText := "Usage: " + executableName  + " LICENSE-PLATE DATE TIME\n" +
+		"Check if a LICENSE-PLATE is allowed within Quito City for a given DATE and TIME,\n"+
+		"Pico y Placa policy implemented in Quito.\n" +
+		"Example: " + executableName + " AAB-0123 2019-05-20 09:31:00\n\n"+
+		"Interpretation of parameters:\n"+
+		"\tLICENSE-PLATE\tThis is the license plate number as described in the legal\n"+
+		"\t\t\tsystem of Ecuador, only Standard Plates are implemented as of now.\n"+
+		"\t\t\tFor example: ABC-0123\n\n"+
+
+		"\tDATE\t\tThe date to check for if a vehicle is allowed in the city.\n"+
+		"\t\t\tThe input expects ISO 8601 standard of the form YYYY-MM-DD.\n"+
+		"\t\t\tFor example: 2019-05-20\n\n"+
+
+		"\tTIME\t\tThe time to check for if a vehicle is allowed in the city.\n"+
+		"\t\t\tThe input expects ISO 8601 standard of the form HH:MM:SS.\n"+
+		"\t\t\tFor example: 09:31:00\n\n"
+
+	bytesWritten, err := fmt.Println(helpText)
+
+	return bytesWritten, err
 }
 
 func displayResult(licensePlate, dateString, timeString string) (int, error) {
