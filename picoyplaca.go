@@ -97,6 +97,18 @@ func validateLicensePlate(licensePlate string) bool {
 		return false
 	}
 
+	// Validate first part is exactly 3 alphabets
+	if len(licensePlateSplit[0]) != 3 {
+		return false
+	}
+
+	// Validate second part is exactly 4/3 digits
+	// 3 digits is the old number plates
+	if len(licensePlateSplit[1]) != 3 && len(licensePlateSplit[1]) != 4 {
+		return false
+	}
+
+
 	// Validate first part is purely alphabets
 	for _, r := range licensePlateSplit[0] {
 		if !unicode.IsLetter(r) {

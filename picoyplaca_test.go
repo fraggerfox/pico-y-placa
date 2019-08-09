@@ -95,8 +95,18 @@ func (s *picoyplacaSuite) Test_parseDateTime_RFC3339_InvalidDateInvalidTime(c *C
 	c.Assert(actualWeekDay, Equals, expectedWeekDay)
 }
 
-func (s *picoyplacaSuite) Test_validateLicensePlate_ValidLicensePate(c *C) {
+func (s *picoyplacaSuite) Test_validateLicensePlate_ValidLicensePlate(c *C) {
 	validLicensePlate := "AAC-1111"
+
+	expectedValidity := true
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
+}
+
+func (s *picoyplacaSuite) Test_validateLicensePlate_ValidLicensePlateOld(c *C) {
+	validLicensePlate := "AAC-111"
 
 	expectedValidity := true
 
@@ -127,6 +137,26 @@ func (s *picoyplacaSuite) Test_validateLicensePlate_NonAlphabetBeforeHyphen(c *C
 
 func (s *picoyplacaSuite) Test_validateLicensePlate_NonNumericAfterHyphen(c *C) {
 	validLicensePlate := "AAC-1A11"
+
+	expectedValidity := false
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
+}
+
+func (s *picoyplacaSuite) Test_validateLicensePlate_InvalidAlphabetLength(c *C) {
+	validLicensePlate := "ABCD-1234"
+
+	expectedValidity := false
+
+	actualValidity := validateLicensePlate(validLicensePlate)
+
+	c.Assert(actualValidity, Equals, expectedValidity)
+}
+
+func (s *picoyplacaSuite) Test_validateLicensePlate_InvalidDigitLength(c *C) {
+	validLicensePlate := "ABC-12345"
 
 	expectedValidity := false
 
