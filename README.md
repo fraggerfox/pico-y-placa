@@ -57,6 +57,11 @@ The implementation is done using [Golang][2].
   $
   ```
 
+License
+-------
+
+BSD 2-clause. See LICENSE.
+
 [1]: https://www.stackbuilders.com/
 [2]: https://golang.org
 [3]: https://gopkg.in/check.v1
