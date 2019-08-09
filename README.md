@@ -24,7 +24,7 @@ The implementation is done using [Golang][2].
 - The program is a command line program and the user is expected to run it in
   a command line environment by invoking the executable name
 - Example outputs
-  -- Invoking without any parameters
+  - Invoking without any parameters
   ```
   $ ./picoyplaca
   Usage: picoyplaca LICENSE-PLATE DATE TIME
@@ -45,7 +45,7 @@ The implementation is done using [Golang][2].
                        The input expects ISO 8601 standard of the form HH:MM:SS.
                        For example: 09:31:00
   ```
-  -- Invoking with parameters
+  - Invoking with parameters
   ```
   $ ./picoyplaca ABC-0123 2019-08-06 08:31:00
   ABC-0123 is NOT allowed on 2019-08-06 at 08:31:00
