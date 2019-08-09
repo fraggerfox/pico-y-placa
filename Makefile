@@ -4,6 +4,9 @@
 # NOTE: Run make depends to get the testing package.
 #
 
+default:
+	@make help
+
 build:
 	go build -v picoyplaca.go
 
@@ -17,10 +20,11 @@ depends:
 	go get -u -v gopkg.in/check.v1
 
 help:
-	@echo "------ How to use this Makefile ------"
+	@echo "------------------ How to use this Makefile ------------------"
 	@echo "make build   - Builds the executable."
 	@echo "make clean   - Cleans the work directory."
+	@echo "make depends - Downloads the check.v1 dependency framework"
+	@echo "               needed for running unit tests."
+	@echo "make help    - Show this help text."
 	@echo "make test    - Runs the Unit tests and shows code coverage."
-	@echo "make depends - Downloads the check.v1 dependency framework needed"
-	@echo "               for running unit tests."
-	@echo "--------------------------------------"
+	@echo "--------------------------------------------------------------"
