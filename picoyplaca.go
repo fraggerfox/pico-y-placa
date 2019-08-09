@@ -84,6 +84,10 @@ func displayResult(licensePlate, dateString, timeString string) (int, error) {
 //
 // 2. Add some way to identify emergency vehicles
 //
+// 3. Checking for holidays (other than weekends) where the rule sare not applied.
+//
+// 4. Better validation by checking the length of the digits and alphabets.
+//
 // Reference: https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Ecuador
 func validateLicensePlate(licensePlate string) bool {
 	licensePlateSplit := strings.Split(licensePlate, "-")
