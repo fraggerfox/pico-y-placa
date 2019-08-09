@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// XXX: Not Implemented
+	start()
 }
 
 func start() (int, error) {
