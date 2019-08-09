@@ -16,7 +16,15 @@ func main() {
 }
 
 func start() (int, error) {
-	return 0, nil
+	if len(os.Args) != 4 {
+		return displayUsage()
+	}
+
+	licensePlate := os.Args[1]
+	dateString := os.Args[2]
+	timeString := os.Args[3]
+
+	return displayResult(licensePlate, dateString, timeString)
 }
 
 func displayUsage() (int, error) {

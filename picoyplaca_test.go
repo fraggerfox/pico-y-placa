@@ -413,11 +413,24 @@ func (s *picoyplacaSuite) Test_displayResult_InvalidTime(c *C) {
 }
 
 func (s *picoyplacaSuite) Test_start_DisplayUsage(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Usage is displayed when there is not enough parameters
+	os.Args = []string{"/path/to/exec.ext", "param1", "param2"}
+
+	expectedReturn := 714
+
+	actualResult, actualError := start()
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_start_DisplayResult(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	os.Args = []string{"/path/to/exec.ext", "ABCD-1234", "2019-05-20", "09:31:00"}
+
+	expectedReturn := 47
+
+	actualResult, actualError := start()
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
