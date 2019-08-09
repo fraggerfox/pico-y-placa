@@ -368,18 +368,18 @@ func (s *picoyplacaSuite) Test_extractLastDigit_InvalidLicensePlate(c *C) {
 }
 
 func (s *picoyplacaSuite) Test_displayResult_ValidParametersAllowed(c *C) {
-	expectedReturn := 47
+	expectedReturn := 46
 
-	actualResult, actualError := displayResult("ABCD-1234", "2019-05-20", "09:31:00")
+	actualResult, actualError := displayResult("ABC-1234", "2019-05-20", "09:31:00")
 
 	c.Assert(actualError, IsNil)
 	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_displayResult_ValidParametersNotAllowed(c *C) {
-	expectedReturn := 51
+	expectedReturn := 50
 
-	actualResult, actualError := displayResult("ABCD-1231", "2019-05-20", "07:31:00")
+	actualResult, actualError := displayResult("ABC-1231", "2019-05-20", "07:31:00")
 
 	c.Assert(actualError, IsNil)
 	c.Assert(actualResult, Equals, expectedReturn)
@@ -388,7 +388,7 @@ func (s *picoyplacaSuite) Test_displayResult_ValidParametersNotAllowed(c *C) {
 func (s *picoyplacaSuite) Test_dislayResult_InvalidLicense(c *C) {
 	expectedReturn := 22
 
-	actualResult, actualError := displayResult("AB1CD-1234", "2019-05-20", "09:31:00")
+	actualResult, actualError := displayResult("A1C-1234", "2019-05-20", "09:31:00")
 
 	c.Assert(actualError, IsNil)
 	c.Assert(actualResult, Equals, expectedReturn)
@@ -397,7 +397,7 @@ func (s *picoyplacaSuite) Test_dislayResult_InvalidLicense(c *C) {
 func (s *picoyplacaSuite) Test_displayResult_InvalidDate(c *C) {
 	expectedReturn := 28
 
-	actualResult, actualError := displayResult("ABCD-1234", "2019-15-02", "09:31:00")
+	actualResult, actualError := displayResult("ABC-1234", "2019-15-02", "09:31:00")
 
 	c.Assert(actualError, IsNil)
 	c.Assert(actualResult, Equals, expectedReturn)
@@ -406,7 +406,7 @@ func (s *picoyplacaSuite) Test_displayResult_InvalidDate(c *C) {
 func (s *picoyplacaSuite) Test_displayResult_InvalidTime(c *C) {
 	expectedReturn := 28
 
-	actualResult, actualError := displayResult("ABCD-1234", "2019-15-02", "39:31:99")
+	actualResult, actualError := displayResult("ABC-1234", "2019-15-02", "39:31:99")
 
 	c.Assert(actualError, IsNil)
 	c.Assert(actualResult, Equals, expectedReturn)
@@ -425,9 +425,9 @@ func (s *picoyplacaSuite) Test_start_DisplayUsage(c *C) {
 }
 
 func (s *picoyplacaSuite) Test_start_DisplayResult(c *C) {
-	os.Args = []string{"/path/to/exec.ext", "ABCD-1234", "2019-05-20", "09:31:00"}
+	os.Args = []string{"/path/to/exec.ext", "ABC-1234", "2019-05-20", "09:31:00"}
 
-	expectedReturn := 47
+	expectedReturn := 46
 
 	actualResult, actualError := start()
 
