@@ -24,38 +24,38 @@ The implementation is done using [Golang][2].
 - The program is a command line program and the user is expected to run it in
   a command line environment by invoking the executable name
 - Example outputs
--- Invoking without any parameters
-   ```
-   $ ./picoyplaca
-   Usage: picoyplaca LICENSE-PLATE DATE TIME
-   Check if a LICENSE-PLATE is allowed within Quito City for a given DATE and TIME,
-   Pico y Placa policy implemented in Quito.
-   Example: picoyplaca AAB-0123 2019-05-20 09:31:00
+  -- Invoking without any parameters
+  ```
+  $ ./picoyplaca
+  Usage: picoyplaca LICENSE-PLATE DATE TIME
+  Check if a LICENSE-PLATE is allowed within Quito City for a given DATE and TIME,
+  Pico y Placa policy implemented in Quito.
+  Example: picoyplaca AAB-0123 2019-05-20 09:31:00
 
-   Interpretation of parameters:
-        LICENSE-PLATE   This is the license plate number as described in the legal
-                        system of Ecuador, only Standard Plates are implemented as of now.
-                        For example: ABC-0123
+  Interpretation of parameters:
+       LICENSE-PLATE   This is the license plate number as described in the legal
+                       system of Ecuador, only Standard Plates are implemented as of now.
+                       For example: ABC-0123
 
-        DATE            The date to check for if a vehicle is allowed in the city.
-                        The input expects ISO 8601 standard of the form YYYY-MM-DD.
-                        For example: 2019-05-20
+       DATE            The date to check for if a vehicle is allowed in the city.
+                       The input expects ISO 8601 standard of the form YYYY-MM-DD.
+                       For example: 2019-05-20
 
-        TIME            The time to check for if a vehicle is allowed in the city.
-                        The input expects ISO 8601 standard of the form HH:MM:SS.
-                        For example: 09:31:00
-   ```
--- Invoking with parameters
-   ```
-   $ ./picoyplaca ABC-0123 2019-08-06 08:31:00
-   ABC-0123 is NOT allowed on 2019-08-06 at 08:31:00
-   $
-   ```
-   ```
-   $ ./picoyplaca ABC-0123 2019-08-09 08:31:00
-   ABC-0123 is allowed on 2019-08-09 at 08:31:00
-   $
-   ```
+       TIME            The time to check for if a vehicle is allowed in the city.
+                       The input expects ISO 8601 standard of the form HH:MM:SS.
+                       For example: 09:31:00
+  ```
+  -- Invoking with parameters
+  ```
+  $ ./picoyplaca ABC-0123 2019-08-06 08:31:00
+  ABC-0123 is NOT allowed on 2019-08-06 at 08:31:00
+  $
+  ```
+  ```
+  $ ./picoyplaca ABC-0123 2019-08-09 08:31:00
+  ABC-0123 is allowed on 2019-08-09 at 08:31:00
+  $
+  ```
 
 [1]: https://www.stackbuilders.com/
 [2]: https://golang.org
