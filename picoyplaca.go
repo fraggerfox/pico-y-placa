@@ -44,7 +44,26 @@ func displayUsage() (int, error) {
 }
 
 func displayResult(licensePlate, dateString, timeString string) (int, error) {
-	return 0, nil
+	var bytesWritten int
+	var err error
+
+	lastDigit, errLicense := extractLastDigit(licensePlate)
+
+	if errLicense == nil {
+		dateTime, errDateTime := parseDateTime(dateString, timeString)
+		if errDateTime == nil {
+			if allowedInCity(lastDigit, dateTime) {
+				bytesWritten, err = fmt.Println(licensePlate + " is allowed on " + dateString + " at " + timeString)
+			} else {
+				bytesWritten, err = fmt.Println(licensePlate + " is NOT allowed on " + dateString + " at " + timeString)
+			}
+		} else {
+			bytesWritten, err = fmt.Println(errDateTime)
+		}
+	} else {
+		bytesWritten, err = fmt.Println(errLicense)
+	}
+	return bytesWritten, err
 }
 
 // A custom function to validate a given license plate value.

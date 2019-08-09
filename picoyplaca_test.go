@@ -367,24 +367,49 @@ func (s *picoyplacaSuite) Test_extractLastDigit_InvalidLicensePlate(c *C) {
 	c.Assert(actualLastDigit, Equals, expectedLastDigit)
 }
 
+func (s *picoyplacaSuite) Test_displayResult_ValidParametersAllowed(c *C) {
+	expectedReturn := 47
+
+	actualResult, actualError := displayResult("ABCD-1234", "2019-05-20", "09:31:00")
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
+}
+
 func (s *picoyplacaSuite) Test_displayResult_ValidParametersNotAllowed(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	expectedReturn := 51
+
+	actualResult, actualError := displayResult("ABCD-1231", "2019-05-20", "07:31:00")
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_dislayResult_InvalidLicense(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	expectedReturn := 22
+
+	actualResult, actualError := displayResult("AB1CD-1234", "2019-05-20", "09:31:00")
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_displayResult_InvalidDate(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	expectedReturn := 28
+
+	actualResult, actualError := displayResult("ABCD-1234", "2019-15-02", "09:31:00")
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_displayResult_InvalidTime(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	expectedReturn := 28
+
+	actualResult, actualError := displayResult("ABCD-1234", "2019-15-02", "39:31:99")
+
+	c.Assert(actualError, IsNil)
+	c.Assert(actualResult, Equals, expectedReturn)
 }
 
 func (s *picoyplacaSuite) Test_start_DisplayUsage(c *C) {
