@@ -330,6 +330,11 @@ func (s *picoyplacaSuite) Test_allowedInCity_Weekend_2(c *C) {
 	c.Assert(actualResult, Equals, expectedResult)
 }
 
+func (s *picoyplacaSuite) Test_displayUsage_VerifyText(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
 // Functional tests
 
 func (s *picoyplacaSuite) Test_extractLastDigit_ValidLicensePlate(c *C) {
@@ -353,4 +358,34 @@ func (s *picoyplacaSuite) Test_extractLastDigit_InvalidLicensePlate(c *C) {
 	c.Assert(actualError, NotNil)
 	c.Assert(actualError, ErrorMatches, "Invalid license plate")
 	c.Assert(actualLastDigit, Equals, expectedLastDigit)
+}
+
+func (s *picoyplacaSuite) Test_displayResult_ValidParametersNotAllowed(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
+func (s *picoyplacaSuite) Test_dislayResult_InvalidLicense(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
+func (s *picoyplacaSuite) Test_displayResult_InvalidDate(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
+func (s *picoyplacaSuite) Test_displayResult_InvalidTime(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
+func (s *picoyplacaSuite) Test_start_DisplayUsage(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
+}
+
+func (s *picoyplacaSuite) Test_start_DisplayResult(c *C) {
+	c.Skip("XXX: Not implemented")
+	c.Fail()
 }

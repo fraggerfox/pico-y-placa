@@ -12,6 +12,18 @@ func main() {
 	// XXX: Not Implemented
 }
 
+func start() (int, error) {
+	return 0, nil
+}
+
+func displayUsage() (int, error) {
+	return 0, nil
+}
+
+func displayResult(licensePlate, dateString, timeString string) (int, error) {
+	return 0, nil
+}
+
 // A custom function to validate a given license plate value.
 //
 // TODO: One can improve upon this function to add additional checks
