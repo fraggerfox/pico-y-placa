@@ -50,6 +50,7 @@ func validateLicensePlate(licensePlate string) bool {
 
 // Converts an ISO 8601 notation date (YYYY-MM-DD) and time (HH:MM:SS) into a
 // RFC3339 Time object for further processing.
+// NOTE: We do UTC-05:00 to conform it to Quito time.
 func parseDateTime(dateString, timeString string) (time.Time, error) {
 	dateTime, err := time.Parse(time.RFC3339, dateString + "T" + timeString + "-05:00")
 	if err != nil {
@@ -72,8 +73,47 @@ func extractLastDigit(licensePlate string) (int, error) {
 
 // Applies the rules of "Pico y Placa" to see if the vechicle is allowed in the
 // city.
+// NOTE: Holidays are not considered in this logic.
 // Reference: https://es.wikipedia.org/wiki/Pico_y_placa#Quito,_Ecuador
 func allowedInCity(lastDigit int, dateTime time.Time) bool {
-	// XXX: Not Implemented
-	return false
+	allowed := true
+
+	weekday := dateTime.Weekday()
+	dateString := dateTime.Format("2006-01-02")
+
+	morningRestrictionStart, _ := time.Parse(time.RFC3339, dateString + "T" + "07:00:00-05:00")
+	morningRestrictionEnd, _ := time.Parse(time.RFC3339, dateString + "T" + "09:30:00-05:00")
+
+	eveningRestrictionStart, _ := time.Parse(time.RFC3339, dateString + "T" + "16:00:00-05:00")
+	eveningRestrictionEnd, _ := time.Parse(time.RFC3339, dateString + "T" + "19:30:00-05:00")
+
+	restrictedMorningTime := dateTime.After(morningRestrictionStart) && dateTime.Before(morningRestrictionEnd)
+	restrictedEveningTime := dateTime.After(eveningRestrictionStart) && dateTime.Before(eveningRestrictionEnd)
+
+	if restrictedMorningTime || restrictedEveningTime {
+		switch weekday {
+		case time.Monday:
+			if lastDigit == 1 || lastDigit == 2 {
+				allowed = false
+			}
+		case time.Tuesday:
+			if lastDigit == 3 || lastDigit == 4 {
+				allowed = false
+			}
+		case time.Wednesday:
+			if lastDigit == 5 || lastDigit == 6 {
+				allowed = false
+			}
+		case time.Thursday:
+			if lastDigit == 7 || lastDigit == 8 {
+				allowed = false
+			}
+		case time.Friday:
+			if lastDigit == 9 || lastDigit == 0 {
+				allowed = false
+			}
+		}
+	}
+
+	return allowed
 }

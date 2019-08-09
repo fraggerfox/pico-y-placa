@@ -135,83 +135,199 @@ func (s *picoyplacaSuite) Test_validateLicensePlate_NonNumericAfterHyphen(c *C) 
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_1(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 1
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T06:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
+// These set of Unit tests, tests if the given last digit works as expected
+// for different times of day restricted / unrestricted times etc
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_2(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 1
+	// Restricted Morning
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T07:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_3(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 1
+	// Unrestricted Morning
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T10:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_4(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 1
+	// Restricted Evening
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T17:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_FixedDigitDifferentTimes_5(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 1
+	// Unrestricted Evening
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T20:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
+// These set of unit tests, tests if the conditional check for the various last
+// digits for the respective days of week work as expected
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitForRespectiveDays_1(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Monday + Restricted Evening
+	lastDigit := 2
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-06T16:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitForRespectiveDays_2(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Tuesday + Restricted Morning
+	lastDigit := 3
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-07T07:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_3(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Tuesday + Unrestricted Morning
+	lastDigit := 4
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-07T10:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_4(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Wednesday + Restricted Morning
+	lastDigit := 5
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-08T07:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_5(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Wednesday + Unrestricted Evening
+	lastDigit := 6
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-08T15:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_6(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Thursday + Restricted Morning
+	lastDigit := 7
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-09T08:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_7(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Thursday + Unrestricted Evening
+	lastDigit := 8
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-09T15:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_8(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Friday + Restricted Morning
+	lastDigit := 9
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-10T07:30:00-05:00")
+
+	expectedResult := false
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_CheckDigitDifferentDays_9(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	// Friday + Unrestricted Evening
+	lastDigit := 0
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-10T15:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
+// These set of Unit tests, tests for weekend days.
 func (s *picoyplacaSuite) Test_allowedInCity_Weekend_1(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 0
+	// Saturday
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-11T07:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 func (s *picoyplacaSuite) Test_allowedInCity_Weekend_2(c *C) {
-	c.Skip("XXX: Not implemented")
-	c.Fail()
+	lastDigit := 0
+	// Sunday
+	dateTime, _ := time.Parse(time.RFC3339, "2019-05-12T07:30:00-05:00")
+
+	expectedResult := true
+
+	actualResult := allowedInCity(lastDigit, dateTime)
+
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
 // Functional tests
